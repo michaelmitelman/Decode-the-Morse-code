@@ -1,4 +1,4 @@
-import {decodeBits, decodeMorse, printBinary, binaryRegex} from './morseCode.js';
+import {decodeBits, decodeMorse, printBinary, binaryRegex, translationToMorse} from './morseCode.js';
 
 test('testing decodeMors', () => {
     expect(decodeMorse('-----')).toStrictEqual('0');
