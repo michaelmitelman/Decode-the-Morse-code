@@ -1,0 +1,95 @@
+var MORSE_CODE = {
+        ".-":"A",
+        "-...":"B",
+        "-.-.":"C",
+        "-..":"D",
+        ".":"E",
+        "..-.":"F",
+        "--.":"G",
+        "....":"H",
+        "..":"I",
+        ".---":"J",
+        "-.-":"K",
+        ".-..":"L",
+        "--":"M",
+        "-.":"N",
+        "---":"O",
+        ".--.":"P",
+        "--.-":"Q",
+        ".-.":"R",
+        "...":"S",
+        "-":"T",
+        "..-":"U",
+        "...-":"V",
+        ".--":"W",
+        "-..-":"X",
+        "-.--":"Y",
+        "--..":"Z",
+    };
+
+var decodeBits = function(bits){
+
+  const trimBits = bits.replace(/(^0+|0+$)/g, '').split('')
+  const result = []
+  var word = []
+  if(trimBits.length > 3){
+    trimBits.every((v, i, array) => {
+      if(i > 0 && i < array.length - 1){
+        return v == array[i-1] ? word.push(v) : result.push(word) && (word = []) && word.push(v)
+      }else  if(i == array.length - 1){
+        return v == array[i-1] ? word.push(v) && result.push(word) : result.push(word) && result.push([v])
+      }else{
+        return word.push(v)
+      }
+    })
+    if(result.length === 1){
+      return result[0][0] == 1 ? '.' : '-'.repeat(result[0].length / 3)
+    }else if(result.map((v) => v.join(''))[1].length == 1 && result.length == 3){
+      let result1 = result.map((v) => v.join(''))
+      return result1.map((v) => v[0] == 1 ? (v.length <= 2 ? '.' : '-') : (v.length >= 1 ? ' ' : '   ')).join('')
+
+    }else{
+      return result.map((v) => v.join('')).map((v) => {
+        if(v[0] == 0){
+          if(v.length % 2 == 0){
+            if(v.length > 6){
+              return '       '
+            }if(v.length == 6){
+              return '   '
+            }else{
+              return ' '
+            }
+          }else if(v.length == 7){
+            return '       '
+          }else if(v.length == 3){
+            return '   '
+          }else if(v.length > 7){
+            return '   '.repeat(v.length / 7 - 1)
+          }else{
+            return ' '
+          }
+        }else if(v[0] == 1){
+          if(v.length % 2 == 0 && v.length % 3 != 0){
+            return String.fromCharCode(46).repeat(v.length / 2)
+          }else if(v.length % 3 == 0){
+            return String.fromCharCode(45)
+          }else{
+            return String.fromCharCode(46)
+          }
+        }
+      }).join('')
+    }
+  }else{
+    
+    return trimBits.every((v, i, arr) => v === arr[0]) && trimBits[0] == 1 ? '.' : '..'
+  }
+}
+
+var decodeMorse = function(morseCode){
+  return morseCode.split('       ').map((v) => v.split('   ')).map((v) => v.map((val) => MORSE_CODE[val.replace(/s/g, '')]).join('')).join(' ')
+}
+
+console.log(decodeMorse(decodeBits('1110110111')))
+console.log(decodeMorse(decodeBits('00011100010101010001000000011101110101110001010111000101000111010111010001110101110000000111010101000101110100011101110111000101110111000111010000000101011101000111011101110001110101011100000001011101110111000101011100011101110001011101110100010101000000011101110111000101010111000100010111010000000111000101010100010000000101110101000101110001110111010100011101011101110000000111010100011101110111000111011101000101110101110101110')))
+console.log(decodeMorse(decodeBits('11111100111111')))
+console.log(decodeMorse(decodeBits('1100110011001100000011000000111111001100111111001111110000000000000011001111110011111100111111000000110011001111110000001111110011001100000011')))
