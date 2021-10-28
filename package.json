@@ -1,0 +1,20 @@
+{
+  "name": "decode-the-morse-code",
+  "version": "1.0.0",
+  "description": "https://www.codewars.com/kata/54b72c16cd7f5154e9000457/javascript",
+  "main": "morseCode.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelmitelman/Decode-the-Morse-code.git"
+  },
+  "author": "Michael Mitelman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michaelmitelman/Decode-the-Morse-code/issues"
+  },
+  "homepage": "https://github.com/michaelmitelman/Decode-the-Morse-code#readme",
+  "type": "module"
+}

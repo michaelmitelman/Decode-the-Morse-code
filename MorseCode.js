@@ -48,7 +48,7 @@ const MORSE_DASH_PAUSE = ' ';
 const MORSE_CHAR_PAUSE = '   ';
 const MORSE_WORD_PAUSE = '       ';
 
-const MORSE_EMPTY_SPACE = ''
+const MORSE_EMPTY_SPACE = '';
 
 /** 
  * decodeBits finds out the transmission rate of the message, correctly decode the message to dots, dashes and spaces.
@@ -61,29 +61,31 @@ const MORSE_EMPTY_SPACE = ''
     const maxTimeUnit = String(Math.max(...bits.match(/[1]+/g))).length; //maximal time unit for a user for transmitting a single character
     const minTimeUnit = String(Math.min(...bits.match(/[1]+/g))).length; //minimal time unit for a user for transmitting a single character
     const rate = (len) => time => len * rules[time];
-    let times;
 
-    if (minTimeUnit === maxTimeUnit) {
-        if(zeroSymbols) {
-            const len = zeroSymbols[0].length;
-            times = Object.values(rules).includes(len) ? rate(1) : rate(len);
-        } else {
-            times = rate(minTimeUnit);
-        }
-    } else {
-        times = rate(minTimeUnit);
-    }
+    const len = zeroSymbols[0].length;
    
-   const words = bits.split(printBinary(0, 'wordsPause'));
+   const words = bits.split(printBinary(0, 'wordsPause', zeroSymbols, maxTimeUnit, minTimeUnit));
    return words.map(translationToMorse(words)).join(MORSE_CHAR_PAUSE);
    }
 
    function translationToMorse(word) {
     return word.replace(binaryRegex(1, 'dot'), '.').replace(binaryRegex(1, 'dash'), '-').replace(binaryRegex(0, 'charPause'), MORSE_DASH_PAUSE).replace(binaryRegex(0, 'ddPause'), MORSE_EMPTY_SPACE), MORSE_EMPTY_SPACE;
    }
+
+   function setTime(len, zeroSymbols, maxTimeUnit, minTimeUnit){
+              if (minTimeUnit === maxTimeUnit) {
+        if(zeroSymbols) {
+            return Object.values(rules).includes(len) ? rate(1) : rate(len);
+        } else {
+            return rate(minTimeUnit);
+        }
+    } else {
+            return rate(minTimeUnit);
+    }
+   }
          
-   function printBinary(binary, time) {
-    return Array.from({length: times(time)}, () => binary).join(MORSE_EMPTY_SPACE);
+   function printBinary(binary, time, zeroSymbols, maxTimeUnit, minTimeUnit) {
+    return Array.from({length: setTime(time, zeroSymbols, maxTimeUnit, minTimeUnit)}, () => binary).join(MORSE_EMPTY_SPACE);
    }
 
    function binaryRegex(binary, type) {
@@ -98,4 +100,4 @@ function decodeMorse(morseCode){
     return morseCode.split(MORSE_WORD_PAUSE).map((v) => v.split(MORSE_CHAR_PAUSE)).map((v) => v.map((val) => MORSE_CODE_DICT[val.replace(/s/g, '')]).join('')).join(MORSE_DASH_PAUSE);
 }
 
-export {decodeBits, decodeMorse, printBinary, binaryRegex, translationToMorse};
+export {decodeBits, decodeMorse, printBinary, binaryRegex, translationToMorse, setTime} from './morseCode';
