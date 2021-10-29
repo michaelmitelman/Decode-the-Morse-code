@@ -4,7 +4,8 @@
   "description": "https://www.codewars.com/kata/54b72c16cd7f5154e9000457/javascript",
   "main": "morseCode.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "babel-node morseCode.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,10 @@
     "url": "https://github.com/michaelmitelman/Decode-the-Morse-code/issues"
   },
   "homepage": "https://github.com/michaelmitelman/Decode-the-Morse-code#readme",
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "babel-jest": "^27.3.1",
+    "jest": "^27.3.1"
+  }
 }

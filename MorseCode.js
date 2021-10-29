@@ -60,9 +60,6 @@ const MORSE_EMPTY_SPACE = '';
     const zeroSymbols = bits.match(/[0]+/);
     const maxTimeUnit = String(Math.max(...bits.match(/[1]+/g))).length; //maximal time unit for a user for transmitting a single character
     const minTimeUnit = String(Math.min(...bits.match(/[1]+/g))).length; //minimal time unit for a user for transmitting a single character
-    const rate = (len) => time => len * rules[time];
-
-    const len = zeroSymbols[0].length;
    
    const words = bits.split(printBinary(0, 'wordsPause', zeroSymbols, maxTimeUnit, minTimeUnit));
    return words.map(translationToMorse(words)).join(MORSE_CHAR_PAUSE);
@@ -73,6 +70,7 @@ const MORSE_EMPTY_SPACE = '';
    }
 
    function setTime(len, zeroSymbols, maxTimeUnit, minTimeUnit){
+        const rate = (len) => time => len * rules[time];
               if (minTimeUnit === maxTimeUnit) {
         if(zeroSymbols) {
             return Object.values(rules).includes(len) ? rate(1) : rate(len);
