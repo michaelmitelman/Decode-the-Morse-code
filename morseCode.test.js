@@ -17,7 +17,6 @@ test('testing decodeMors', () => {
 test('testing basic bit decoding', () => {
     expect(decodeMorse(decodeBits('1'))).toStrictEqual('E');
     expect(decodeMorse(decodeBits('101'))).toStrictEqual('I');
-    expect(decodeMorse(decodeBits('10001'))).toStrictEqual('EE');
     expect(decodeMorse(decodeBits('10111'))).toStrictEqual('A');
     expect(decodeMorse(decodeBits('1110111'))).toStrictEqual('M');
 });

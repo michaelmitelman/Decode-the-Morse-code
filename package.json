@@ -18,13 +18,14 @@
     "url": "https://github.com/michaelmitelman/Decode-the-Morse-code/issues"
   },
   "homepage": "https://github.com/michaelmitelman/Decode-the-Morse-code#readme",
-  "devDependencies": {
+  "dependencies": {
     "@babel/cli": "^7.16.0",
     "@babel/core": "^7.16.0",
     "@babel/node": "^7.16.0",
     "@babel/preset-env": "^7.16.0",
     "@babel/preset-typescript": "^7.16.0",
-    "babel-jest": "^27.3.1",
-    "jest": "^27.3.1"
-  }
+    "jest": "^27.3.1",
+    "babel-jest": "^27.3.1"
+  },
+  "devDependencies": {}
 }
