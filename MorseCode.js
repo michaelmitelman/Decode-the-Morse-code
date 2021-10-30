@@ -52,7 +52,7 @@ const MORSE_EMPTY_SPACE = '';
 
 /** 
  * decodeBits finds out the transmission rate of the message, correctly decode the message to dots, dashes and spaces.
- * @param {bits}  
+ * @param {bits}  gets a series of bits
  * @returns decoded string
 */
    function decodeBits(bits){ 
@@ -98,4 +98,4 @@ function decodeMorse(morseCode){
     return morseCode.split(MORSE_WORD_PAUSE).map((v) => v.split(MORSE_CHAR_PAUSE)).map((v) => v.map((val) => MORSE_CODE_DICT[val.replace(/s/g, '')]).join('')).join(MORSE_DASH_PAUSE);
 }
 
-export {decodeBits, decodeMorse, printBinary, binaryRegex, translationToMorse, setTime} from './morseCode';
+export {decodeBits, decodeMorse};
