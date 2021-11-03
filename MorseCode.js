@@ -56,39 +56,6 @@ let times;
  * @param {bits}  gets a series of bits
  * @returns decoded string
 */
-   /*function decodeBits(bits) {
-    bits = bits.replace(/(^[0]+)|([0]+)$/g, MORSE_EMPTY_SPACE); //replace all the starting 0's characters to empty space
-    const maxTimeUnit = String(Math.max(...bits.match(/[1]+/g))).length; //maximal time unit for a user for transmitting a single character
-    const minTimeUnit = String(Math.min(...bits.match(/[1]+/g))).length; //minimal time unit for a user for transmitting a single character
-    const zeroSymbols = bits.match(/[0]+/);
-    const rate = (len) => time => len * rules[time];
-
-    if(minTimeUnit == maxTimeUnit){
-        if(zeroSymbols){
-            const len = zeroSymbols[0].length;
-            times = Object.values(rules).includes(zeroSymbols[0].length) ? rate(1) : rate(zeroSymbols[0].length);
-        } else {
-            times = rate(minTimeUnit);
-        }
-    } else {
-        times = rate(minTimeUnit);
-    }
-
-    const words = bits.split(printBinary(0, 'wordsPause'));
-    return words.map(translationToMorse).join(MORSE_CHAR_PAUSE);
-   }
-
-   function printBinary(b, t) {
-    return Array.from({length: times(t)}, () => b).join('');
-   }
-
-   function binaryRegex(binary, type) {
-    return new RegExp(printBinary(binary, type), 'g');
-   }
-
-   function translationToMorse(word) {
-       return word.replace(binaryRegex(1, 'dash'), '-').replace(binaryRegex(1, 'dot'), '.').replace(binaryRegex(0, 'charPause'), MORSE_DASH_PAUSE).replace(binaryRegex(0, 'ddPause'), MORSE_EMPTY_SPACE);
-   }*/
 
    function unmultiplyString (str, factor) {
 	var ret = [];
